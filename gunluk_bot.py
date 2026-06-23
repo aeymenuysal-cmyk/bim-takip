@@ -1,3 +1,6 @@
+def get_gunluk():
+    print(f"Repo: {GITHUB_REPO}")
+    print(f"Token ilk 4: {GITHUB_TOKEN[:4]}")
 import os
 import json
 import requests
