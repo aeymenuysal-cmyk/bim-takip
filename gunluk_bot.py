@@ -70,8 +70,11 @@ def cevabi_kaydet():
     print(f"Kaydedildi. Toplam {toplam} gün.")
 
 MODE = os.environ.get("MODE", "soru")
+import sys
+MODE = os.environ.get("MODE", "soru")
+print(f"Mode: {MODE}")
 if __name__ == "__main__":
-    if MODE == "soru":
-        soru_sor()
-    elif MODE == "kaydet":
+    if MODE == "kaydet":
         cevabi_kaydet()
+    else:
+        soru_sor()
