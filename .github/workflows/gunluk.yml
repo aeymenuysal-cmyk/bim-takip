@@ -24,6 +24,6 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GUNLUK_GITHUB_TOKEN: ${{ secrets.GUNLUK_GITHUB_TOKEN }}
-          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
+          REPO_NAME: ${{ secrets.REPO_NAME }}
           MODE: ${{ github.event.inputs.mode || (github.event.schedule == '0 19 * * *' && 'soru' || 'kaydet') }}
         run: python gunluk_bot.py
