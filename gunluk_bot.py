@@ -32,6 +32,7 @@ def get_gunluk():
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GUNLUK_FILE}"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
     resp = requests.get(url, headers=headers, timeout=10)
+    print(f"GET gunluk: {resp.status_code}")
     if resp.status_code == 200:
         content = resp.json()
         data = json.loads(base64.b64decode(content["content"]).decode())
@@ -45,7 +46,8 @@ def save_gunluk(data, sha=None):
     payload = {"message": "Günlük güncellendi", "content": content}
     if sha:
         payload["sha"] = sha
-    requests.put(url, headers=headers, json=payload, timeout=10)
+    resp = requests.put(url, headers=headers, json=payload, timeout=10)
+    print(f"PUT gunluk: {resp.status_code} - {resp.text}")
 
 def soru_sor():
     bugun = datetime.now().strftime("%d.%m.%Y")
@@ -55,6 +57,7 @@ def soru_sor():
 
 def cevabi_kaydet():
     cevap = get_last_message()
+    print(f"Bulunan cevap: {cevap}")
     if not cevap:
         print("Henüz cevap yok.")
         return
@@ -69,7 +72,6 @@ def cevabi_kaydet():
     send_telegram(f"✅ <b>Günlüğe kaydedildi!</b>\n\n📓 Toplam <b>{toplam}</b> gün yazdın.\nİyi geceler! 😴")
     print(f"Kaydedildi. Toplam {toplam} gün.")
 
-MODE = os.environ.get("MODE", "soru")
 import sys
 MODE = os.environ.get("MODE", "soru")
 print(f"Mode: {MODE}")
