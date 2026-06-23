@@ -7,7 +7,7 @@ from datetime import datetime
 TELEGRAM_BOT_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 GITHUB_TOKEN = os.environ["GUNLUK_GITHUB_TOKEN"]
-GITHUB_REPO = os.environ["GITHUB_REPO"]
+GITHUB_REPO = os.environ["REPO_NAME"]
 GUNLUK_FILE = "gunluk.json"
 
 def send_telegram(message):
