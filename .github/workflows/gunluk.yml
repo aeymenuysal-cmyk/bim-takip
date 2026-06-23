@@ -1,0 +1,29 @@
+name: Günlük Bot
+
+on:
+  schedule:
+    - cron: "0 19 * * *"
+    - cron: "0 20 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'soru veya kaydet'
+        default: 'soru'
+
+jobs:
+  gunluk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests
+      - name: Çalıştır
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GUNLUK_GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
+          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '0 19 * * *' && 'soru' || 'kaydet') }}
+        run: python gunluk_bot.py
