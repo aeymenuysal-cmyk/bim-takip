@@ -1,6 +1,3 @@
-def get_gunluk():
-    print(f"Repo: {GITHUB_REPO}")
-    print(f"Token ilk 4: {GITHUB_TOKEN[:4]}")
 import os
 import json
 import requests
@@ -32,15 +29,9 @@ def get_last_message():
     return None
 
 def get_gunluk():
+    print(f"Repo: {GITHUB_REPO}")
+    print(f"Token ilk 4: {GITHUB_TOKEN[:4]}")
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GUNLUK_FILE}"
-    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
-    resp = requests.get(url, headers=headers, timeout=10)
-    print(f"GET gunluk: {resp.status_code}")
-    if resp.status_code == 200:
-        content = resp.json()
-        data = json.loads(base64.b64decode(content["content"]).decode())
-        return data, content["sha"]
-    return {}, None
 
 def save_gunluk(data, sha=None):
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GUNLUK_FILE}"
